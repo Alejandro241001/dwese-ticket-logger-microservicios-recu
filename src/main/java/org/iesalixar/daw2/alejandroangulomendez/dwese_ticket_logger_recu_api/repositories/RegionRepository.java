@@ -1,8 +1,10 @@
 package org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.repositories;
 
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.dtos.RegionCreateDTO;
 import org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.entities.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -14,7 +16,7 @@ public interface RegionRepository extends JpaRepository<Region, Long> {
     List<Region> findAll();
 
 
-    Region save(Region region);
+
 
 
     Optional<Region> findById(Long id);
@@ -23,4 +25,6 @@ public interface RegionRepository extends JpaRepository<Region, Long> {
     boolean existsByCode(@NotEmpty(message = "{msg.region.code.notEmpty}") @Size(max = 2, message = "{msg.region.code.size}") String code);
 
     boolean existsRegionByCodeAndIdNot(@NotEmpty(message = "{msg.region.code.notEmpty}") @Size(max = 2, message = "{msg.region.code.size}") String code, Long id);
+
+    Region save(@Valid RegionCreateDTO regionCreateDTO);
 }

@@ -1,14 +1,13 @@
 package org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.entities;
 
+
 import jakarta.persistence.*; // Anotaciones de JPA
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-
+import java.util.List;
 
 /**
  * La clase `Province` representa una entidad que modela una provincia dentro de la base de datos.
@@ -21,9 +20,12 @@ import lombok.NoArgsConstructor;
  */
 @Entity // Marca esta clase como una entidad JPA.
 @Table(name = "provinces") // Define el nombre de la tabla asociada a esta entidad.
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"locations", "region"}) // Excluir `locations` y `region` para evitar ciclos recursivos.
+@EqualsAndHashCode(exclude = {"locations", "region"}) // Excluir `locations` y `region` para evitar problemas de recursión.
 public class Province {
 
     // Campo que almacena el identificador único de la provincia. Es autogenerado y clave primaria.
@@ -45,20 +47,17 @@ public class Province {
     private String name;
 
 
-
     // Relación con la entidad `Region`, representando la comunidad autónoma a la que pertenece la provincia.
     @NotNull(message = "{msg.province.region.notNull}")
-    @ManyToOne(fetch = FetchType.LAZY) // Relación de muchas provincias a una región.
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "region_id", nullable = false)
-    // Clave foránea en la tabla provinces que referencia a la tabla regions.
     private Region region;
 
     /**
      * Constructor que excluye el campo `id`. Se utiliza para crear instancias de `Province`
      * cuando el `id` aún no se ha generado (por ejemplo, antes de insertarla en la base de datos).
-     *
-     * @param code   Código de la provincia.
-     * @param name   Nombre de la provincia.
+     * @param code Código de la provincia.
+     * @param name Nombre de la provincia.
      * @param region La región a la que pertenece la provincia.
      */
     public Province(String code, String name, Region region) {
