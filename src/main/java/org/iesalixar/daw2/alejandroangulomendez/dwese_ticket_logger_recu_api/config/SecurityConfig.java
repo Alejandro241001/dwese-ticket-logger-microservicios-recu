@@ -62,13 +62,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
                         .requestMatchers("/api/tickets").hasRole("USER")
-                        .requestMatchers("/api/admin").hasRole("ADMIN")
+                        .requestMatchers("/api/admin","/api/categories").hasRole("ADMIN")
                         .requestMatchers(
                                 "/api/regions",
                                 "/api/provinces",
                                 "/api/supermarkets",
                                 "/api/locations",
-                                "/apicategories").hasRole("MANAGER")
+                                "/api/categories").hasRole("MANAGER")
                         .requestMatchers("/api/v1/authenticate", "/api/v1/register").permitAll()
                         .anyRequest().authenticated()
                 )

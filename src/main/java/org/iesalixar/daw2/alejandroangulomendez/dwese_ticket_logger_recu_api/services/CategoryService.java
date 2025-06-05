@@ -45,16 +45,21 @@ public class CategoryService {
      * Crea una nueva categoría.
      */
     public CategoryDTO createCategory(CategoryCreateDTO dto) {
+        // Comprobación de nombre duplicado (ignorando mayúsculas/minúsculas)
+        if (categoryRepository.existsByNameIgnoreCase(dto.getName())) {
+            throw new IllegalArgumentException("Ya existe una categoría con ese nombre.");
+        }
+
         Category parentCategory = null;
         if (dto.getParentCategoryId() != null) {
             parentCategory = categoryRepository.findById(dto.getParentCategoryId())
                     .orElseThrow(() -> new IllegalArgumentException("Categoría padre no encontrada"));
         }
+
         Category category = categoryMapper.toEntity(dto, parentCategory);
         Category saved = categoryRepository.save(category);
         return categoryMapper.toDTO(saved);
     }
-
     /**
      * Actualiza categoría existente.
      */
