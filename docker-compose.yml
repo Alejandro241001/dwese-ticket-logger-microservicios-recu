@@ -64,6 +64,23 @@ services:
     networks:
       - backend
 
+  auth-service:
+    build:
+      context: ./dwese-auth-service
+    container_name: auth-service
+    env_file:
+      - .env
+    ports:
+      - "8081:8080"
+      - "5081:5005"
+    volumes:
+      - ./dwese-ticket-logger-api/keystore:/app/keystore/
+      - ./.env:/app/.env
+    depends_on:
+      - db # Requiere DB
+      - rabbitmq # Requiere RabbitMQ
+    networks:
+      - backend
   ticket-logger-api:
     build:
       context: ./dwese_ticket_logger_recu_api
