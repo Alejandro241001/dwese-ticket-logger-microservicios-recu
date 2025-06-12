@@ -60,7 +60,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-
+                        .requestMatchers("/api/v1/authenticate", "/api/v1/register", "/test/rabbitmq/**").permitAll()
                         .requestMatchers("/api/tickets").hasRole("USER")
                         .requestMatchers("/api/admin","/api/categories").hasRole("ADMIN")
                         .requestMatchers(
@@ -69,7 +69,7 @@ public class SecurityConfig {
                                 "/api/supermarkets",
                                 "/api/locations",
                                 "/api/categories").hasRole("MANAGER")
-                        .requestMatchers("/api/v1/authenticate", "/api/v1/register").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
