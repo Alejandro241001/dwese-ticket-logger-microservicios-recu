@@ -3,9 +3,9 @@ package org.iesalixar.daw2.alejandroangulomendez.dwese_auth_service.controllers;
 
 
 import jakarta.validation.Valid;
-import org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.dtos.AuthRequestDTO;
-import org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.dtos.AuthResponseDTO;
-import org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.utils.JwtUtil;
+import org.iesalixar.daw2.alejandroangulomendez.dwese_auth_service.dtos.AuthResponseDTO;
+import org.iesalixar.daw2.alejandroangulomendez.dwese_auth_service.dtos.AuthRequestDTO;
+import org.iesalixar.daw2.alejandroangulomendez.dwese_auth_service.utils.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class AuthenticationController {
      *
      * genera un token JWT que incluye informacion del usuario y sus roles.
      *
-     * @param authRequest Un objeto {@link org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.dtos.AuthRequestDTO} que contiene el nombre de usuario y la contraseña
+     * @param authRequest Un objeto {@link org.iesalixar.daw2.alejandroangulomendez.dwese_auth_service.dtos.AuthRequestDTO} que contiene el nombre de usuario y la contraseña
      * @return Una respuesta HTTP con un token JWT en caso de éxito o un error en caso de fallo.
      *
      */
