@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.dtos.AuthRequestDTO;
 import org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.dtos.AuthResponseDTO;
 import org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.utils.JwtUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class AuthenticationController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -59,6 +62,7 @@ public class AuthenticationController {
                     .body(new AuthResponseDTO(null, "Credenciales inválidas. Por favor, verifica tus datos."));
 
         }catch (Exception e){
+
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new AuthResponseDTO(null, "Ocurrió un error inesperado. Por favor inténtalo de nuevo más tarde."));
         }
