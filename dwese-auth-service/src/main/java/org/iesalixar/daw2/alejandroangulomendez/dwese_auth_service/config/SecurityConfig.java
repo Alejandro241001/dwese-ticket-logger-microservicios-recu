@@ -2,6 +2,7 @@ package org.iesalixar.daw2.alejandroangulomendez.dwese_auth_service.config;
 
 
 import org.iesalixar.daw2.alejandroangulomendez.dwese_auth_service.servicies.CustomUserDetailsService;
+import org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.config.JwtAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
