@@ -1,4 +1,4 @@
-package org.iesalixar.daw2.alejandroangulomendez.dwese_ticket_logger_recu_api.config;
+package org.iesalixar.daw2.alejandroangulomendez.dwese_auth_service.config;
 
 
 
